@@ -42,6 +42,9 @@ class IMQTT {
     });
   }
   static addDeviceToHass(device) {
+    if (!this.client)
+      return this.throwNotConnectedError();
+    
     log.info(`Advising home assistant to discover this device: ${device}`);
     
     const config = {

@@ -41,8 +41,10 @@ class ITags {
   }
   setNobleEvents = () => {
     noble.on('stateChange', async (state) => {
+      if (state === 'poweredOn') {
         log.debug(`starting scan..`); 
         await noble.startScanningAsync([], true);
+      }
     });
     noble.on('discover', this.discover.bind(this));
     noble.on('scanStart', () => log.info("scanning started"));
